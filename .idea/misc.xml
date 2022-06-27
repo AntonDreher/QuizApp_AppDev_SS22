@@ -5,6 +5,8 @@
       <map>
         <entry key="..\:/Users/alexa/OneDrive/Dokumente/Studium/AAU/Semester 6/App Development/Projekt/QuizApp_frontend/app/src/main/res/layout/activity_main.xml" value="0.27291666666666664" />
         <entry key="..\:/Users/alexa/OneDrive/Dokumente/Studium/AAU/Semester 6/App Development/Projekt/QuizApp_frontend/app/src/main/res/layout/fragment_main.xml" value="0.25" />
+        <entry key="..\:/Users/alexa/OneDrive/Dokumente/Studium/AAU/Semester 6/App Development/Projekt/QuizApp_frontend/app/src/main/res/layout/fragment_question.xml" value="0.21927083333333333" />
+        <entry key="..\:/Users/alexa/OneDrive/Dokumente/Studium/AAU/Semester 6/App Development/Projekt/QuizApp_frontend/app/src/main/res/layout/fragment_wrong_answer.xml" value="0.21927083333333333" />
       </map>
     </option>
   </component>

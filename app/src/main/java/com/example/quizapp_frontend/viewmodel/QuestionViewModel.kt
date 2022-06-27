@@ -9,8 +9,12 @@ import com.example.quizapp_frontend.repository.QuestionRepository
 //TODO was abstract
 class QuestionViewModel(application: Application): AndroidViewModel(application) {
     private val questionRepository:QuestionRepository = QuestionRepository(application)
+    private lateinit var currentQuestion : LiveData<QuestionEntity>
+    fun updateCurrentQuestion(){
+        currentQuestion = questionRepository.getRandomQuestion()
+    }
 
-    fun getRandomQuestion() : LiveData<QuestionEntity>{
-        return questionRepository.getRandomQuestion()
+    fun getCurrentQuestion() : LiveData<QuestionEntity>{
+        return currentQuestion
     }
 }
