@@ -1,9 +1,10 @@
-package com.example.quizapp_frontend
+package com.example.quizapp_frontend.ui
 
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.quizapp_frontend.R
 import com.example.quizapp_frontend.api.QuestionResponse
 import com.example.quizapp_frontend.api.QuizApi
 import com.example.quizapp_frontend.model.QuestionEntity
@@ -17,20 +18,13 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var questionViewModel : QuestionViewModel
-    private lateinit var currentQuestion : QuestionEntity
     private lateinit var questionRepository : QuestionRepository
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         questionRepository = QuestionRepository(application)
         makeRequest()
-
-        questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
-        questionViewModel.getRandomQuestion().observe(this
-        ) { question ->
-            Log.d("main", "onChanged: $question")
-        }
     }
 
     private fun makeRequest() {
@@ -46,7 +40,6 @@ class MainActivity : AppCompatActivity() {
                     response.body()?.let { questionRepository.insert(it) }
                 }
             }
-
             override fun onFailure(call: Call<List<QuestionResponse>>, t: Throwable) {
                 Log.d("main", "onFailure: " + t.message)
             }
