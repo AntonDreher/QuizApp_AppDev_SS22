@@ -23,6 +23,27 @@ jobs:
           cache: gradle
       - name: Unit tests
         run: bash ./gradlew test --stacktrace
+  build:
+    name: Upload apk to App Tester
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: set up JDK 11
+        uses: actions/setup-java@v3
+        with:
+          java-version: 11
+          distribution: 'temurin'
+          cache: gradle
+      - name: build release
+        run: bash ./gradlew assembleDebug
+      - name: upload artifact to Firebase App Distribution
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.2.2
+        with:
+          appId: '1:198757624200:android:fbb45df7bf7f1a794cf23d'
+          token: '1//09EH1f0WlqJoZCgYIARAAGAkSNwF-L9IrvNWQODZfS-QQtnde7Y-XZvAXMLxW3ONwhXxCX2oZHhC49XDF-N5Sgb7ZPnGpn5zxlYo'
+          groups: testers
+          file: app/build/outputs/apk/debug/app-debug.apk
 
   apk:
     name: Generate APK
