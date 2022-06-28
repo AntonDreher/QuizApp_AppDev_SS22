@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.example.quizapp_frontend.CorrectAnswerFragment
 import com.example.quizapp_frontend.R
 import com.example.quizapp_frontend.databinding.FragmentQuestionBinding
 import com.example.quizapp_frontend.model.QuestionEntity
@@ -34,7 +33,7 @@ class QuestionFragment : Fragment() {
     }
 
     private fun initializeViewModel(){
-        questionViewModel = ViewModelProvider(this).get(QuestionViewModel::class.java)
+        questionViewModel = ViewModelProvider(requireActivity())[QuestionViewModel::class.java]
         questionViewModel.updateCurrentQuestion()
     }
 
