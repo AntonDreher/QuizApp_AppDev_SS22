@@ -3,15 +3,11 @@ package com.example.quizapp_frontend.ui
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
-import com.example.quizapp_frontend.CorrectAnswerFragment
 import com.example.quizapp_frontend.R
 import com.example.quizapp_frontend.api.QuestionResponse
 import com.example.quizapp_frontend.api.QuizApi
-import com.example.quizapp_frontend.model.QuestionEntity
 import com.example.quizapp_frontend.repository.QuestionRepository
 import com.example.quizapp_frontend.ui.fragments.QuestionFragment
-import com.example.quizapp_frontend.viewmodel.QuestionViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
