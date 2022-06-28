@@ -2,6 +2,7 @@ package com.example.quizapp_frontend.repository
 
 import android.app.Application
 import android.os.AsyncTask
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.room.Room
 import com.example.quizapp_frontend.api.QuestionResponse
@@ -18,14 +19,16 @@ class QuestionRepository(application: Application) {
         database = Room.databaseBuilder(application, AppDatabase::class.java, DB_NAME).build()
         questionDao = database.questionDao()
     }
-    fun insert(questionsResponse : List<QuestionResponse>){
+    fun insert(questionsResponse : List<QuestionResponse>): AsyncTask<List<QuestionEntity?>?, Void?, Void?>? {
         val questionsToInsert = convertQuestionResponseToDbObject(questionsResponse)
-        InsertAsyncTask(questionDao).execute(questionsToInsert)
+        return InsertAsyncTask(questionDao).execute(questionsToInsert)
     }
 
     fun convertQuestionResponseToDbObject(questionsToConvert : List<QuestionResponse>) : List<QuestionEntity>{
         val convertedQuestions = mutableListOf<QuestionEntity>()
+        Log.d("size", questionsToConvert.size.toString())
         for(currentQuestion in questionsToConvert){
+
             convertedQuestions.add(
                 QuestionEntity(
                 currentQuestion.id,
