@@ -24,7 +24,7 @@ class QuestionRepository(application: Application) {
         return InsertAsyncTask(questionDao).execute(questionsToInsert)
     }
 
-    fun convertQuestionResponseToDbObject(questionsToConvert : List<QuestionResponse>) : List<QuestionEntity>{
+    private fun convertQuestionResponseToDbObject(questionsToConvert : List<QuestionResponse>) : List<QuestionEntity>{
         val convertedQuestions = mutableListOf<QuestionEntity>()
         Log.d("size", questionsToConvert.size.toString())
         for(currentQuestion in questionsToConvert){

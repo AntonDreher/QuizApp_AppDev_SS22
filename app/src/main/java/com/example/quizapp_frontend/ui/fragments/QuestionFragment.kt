@@ -1,11 +1,11 @@
 package com.example.quizapp_frontend.ui.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.quizapp_frontend.R
 import com.example.quizapp_frontend.databinding.FragmentQuestionBinding
@@ -45,7 +45,7 @@ class QuestionFragment : Fragment() {
     }
 
     private fun fillQuestion(){
-        questionViewModel.getCurrentQuestion().observe(this)
+        questionViewModel.getCurrentQuestion().observeForever()
         { question ->
             fillIncorrectAnswerArray(question)
             val correctAnswerPosition = (0..3).shuffled().last()

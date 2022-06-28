@@ -4,6 +4,8 @@ import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,6 +52,9 @@ class WrongAnswerFragment : Fragment() {
             objectAnimator.repeatCount = Animation.INFINITE
             objectAnimator.start()
             questionViewModel.answerSelected()
+            Handler(Looper.getMainLooper()).postDelayed({
+                questionViewModel.updateCurrentQuestion()
+            }, 3000)
         }
     }
 

@@ -4,6 +4,8 @@ import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
@@ -21,12 +23,10 @@ class CorrectAnswerFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         questionViewModel = ViewModelProvider(requireActivity())[QuestionViewModel::class.java]
+        setObserverForAnswerSelected()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val answer = arguments?.getString("answer")
         binding = FragmentCorrectAnswerBinding.inflate(inflater, container, false)
         binding.correctAnswerTextViewId.setText(answer)
@@ -38,20 +38,35 @@ class CorrectAnswerFragment : Fragment() {
 
     private fun onClickCardView(view: View) {
         if(questionViewModel.answerSelected.value == false) {
-            val objectAnimator = ObjectAnimator.ofInt(
-                binding.cardViewCorrectAnswer,
-                "backgroundColor",
-                Color.GREEN,
-                Color.GRAY
-            )
-            objectAnimator.duration = 1000
-            objectAnimator.setEvaluator(ArgbEvaluator())
-            objectAnimator.repeatCount = Animation.REVERSE
-            objectAnimator.repeatCount = Animation.INFINITE
-            objectAnimator.start()
             questionViewModel.answerSelected()
-            questionViewModel.updateCurrentQuestion()
+            Handler(Looper.getMainLooper()).postDelayed({
+                questionViewModel.updateCurrentQuestion()
+            }, 3000)
+
         }
+    }
+
+    private fun setObserverForAnswerSelected(){
+        questionViewModel.answerSelected.observe(this)
+        { value ->
+            if(value){
+                startAnimation()
+            }
+        }
+    }
+
+    private fun startAnimation(){
+        val objectAnimator = ObjectAnimator.ofInt(
+            binding.cardViewCorrectAnswer,
+            "backgroundColor",
+            Color.GREEN,
+            Color.GRAY
+        )
+        objectAnimator.duration = 1000
+        objectAnimator.setEvaluator(ArgbEvaluator())
+        objectAnimator.repeatCount = Animation.REVERSE
+        objectAnimator.repeatCount = Animation.INFINITE
+        objectAnimator.start()
     }
 
 
