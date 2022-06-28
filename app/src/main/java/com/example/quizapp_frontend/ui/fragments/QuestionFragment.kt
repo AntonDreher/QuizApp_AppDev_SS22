@@ -47,11 +47,14 @@ class QuestionFragment : Fragment() {
     private fun fillQuestion(){
         questionViewModel.getCurrentQuestion().observeForever()
         { question ->
-            fillIncorrectAnswerArray(question)
-            val correctAnswerPosition = (0..3).shuffled().last()
-            fillCorrectAnswer(question.correctAnswer, correctAnswerPosition)
-            fillIncorrectAnswers(correctAnswerPosition)
-            startTimer()
+            if(question != null) {
+                fillIncorrectAnswerArray(question)
+                val correctAnswerPosition = (0..3).shuffled().last()
+                fillCorrectAnswer(question.correctAnswer, correctAnswerPosition)
+                fillIncorrectAnswers(correctAnswerPosition)
+            }else{
+                showStatisticDialog()
+            }
         }
     }
 
@@ -97,5 +100,7 @@ class QuestionFragment : Fragment() {
         fragment.replace(R.id.fragmentProgressBarContainer, progressFragment)
     }
 
-
+    private fun showStatisticDialog(){
+       GameFinishedDialogFragment().show(childFragmentManager, GameFinishedDialogFragment.TAG)
+    }
 }

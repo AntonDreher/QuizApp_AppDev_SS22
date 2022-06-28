@@ -72,6 +72,8 @@ class MainActivity : AppCompatActivity() {
             value ->
                 if(value == NavigationMessage.SINGLE_PLAYER){
                     showSinglePlayerFragment()
+                }else if(value == NavigationMessage.MAIN_MENU){
+                    showMenuFragment()
                 }
         }
     }

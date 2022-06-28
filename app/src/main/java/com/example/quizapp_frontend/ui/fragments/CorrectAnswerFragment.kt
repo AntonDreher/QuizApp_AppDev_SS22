@@ -14,15 +14,18 @@ import android.view.animation.Animation
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.quizapp_frontend.databinding.FragmentCorrectAnswerBinding
+import com.example.quizapp_frontend.viewmodel.GameStatisticsViewModel
 import com.example.quizapp_frontend.viewmodel.QuestionViewModel
 
 class CorrectAnswerFragment : Fragment() {
     private lateinit var questionViewModel : QuestionViewModel
+    private lateinit var gameStatisticsViewModel: GameStatisticsViewModel
     private lateinit var binding: FragmentCorrectAnswerBinding
 
     override fun onStart() {
         super.onStart()
         questionViewModel = ViewModelProvider(requireActivity())[QuestionViewModel::class.java]
+        gameStatisticsViewModel = ViewModelProvider(requireActivity())[GameStatisticsViewModel::class.java]
         setObserverForAnswerSelected()
     }
 
@@ -30,7 +33,7 @@ class CorrectAnswerFragment : Fragment() {
         val answer = arguments?.getString("answer")
         binding = FragmentCorrectAnswerBinding.inflate(inflater, container, false)
         binding.correctAnswerTextViewId.setText(answer)
-        binding.cardViewCorrectAnswer.setOnClickListener { // adding the color to be shown
+        binding.cardViewCorrectAnswer.setOnClickListener {
             onClickCardView(it)
         }
         return binding.root
@@ -39,6 +42,7 @@ class CorrectAnswerFragment : Fragment() {
     private fun onClickCardView(view: View) {
         if(questionViewModel.answerSelected.value == false) {
             questionViewModel.answerSelected()
+            gameStatisticsViewModel.correctAnswerSelected()
             Handler(Looper.getMainLooper()).postDelayed({
                 questionViewModel.updateCurrentQuestion()
             }, 3000) //TODO unify
