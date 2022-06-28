@@ -51,6 +51,7 @@ class QuestionFragment : Fragment() {
             val correctAnswerPosition = (0..3).shuffled().last()
             fillCorrectAnswer(question.correctAnswer, correctAnswerPosition)
             fillIncorrectAnswers(correctAnswerPosition)
+            startTimer()
         }
     }
 
@@ -88,6 +89,12 @@ class QuestionFragment : Fragment() {
         incorrectAnswers[0] = question.incorrectAnswer1
         incorrectAnswers[1] = question.incorrectAnswer2
         incorrectAnswers[2] = question.incorrectAnswer3
+    }
+
+    private fun  startTimer(){
+        val fragment = childFragmentManager.beginTransaction()
+        val progressFragment = ProgressFragment()
+        fragment.replace(R.id.fragmentProgressBarContainer, progressFragment)
     }
 
 
