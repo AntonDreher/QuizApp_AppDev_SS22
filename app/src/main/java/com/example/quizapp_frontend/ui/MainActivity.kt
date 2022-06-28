@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.quizapp_frontend.CorrectAnswerFragment
 import com.example.quizapp_frontend.R
 import com.example.quizapp_frontend.api.QuestionResponse
 import com.example.quizapp_frontend.api.QuizApi
 import com.example.quizapp_frontend.model.QuestionEntity
 import com.example.quizapp_frontend.repository.QuestionRepository
+import com.example.quizapp_frontend.ui.fragments.QuestionFragment
 import com.example.quizapp_frontend.viewmodel.QuestionViewModel
 import retrofit2.Call
 import retrofit2.Callback
@@ -37,12 +39,23 @@ class MainActivity : AppCompatActivity() {
         call.enqueue(object : Callback<List<QuestionResponse>> {
             override fun onResponse(call: Call<List<QuestionResponse>>, response: Response<List<QuestionResponse>>) {
                 if (response.isSuccessful) {
-                    response.body()?.let { questionRepository.insert(it) }
+                    response.body()?.let {
+                        questionRepository.insert(it)?.get()
+                        createFragment()
+                    }
+
                 }
             }
             override fun onFailure(call: Call<List<QuestionResponse>>, t: Throwable) {
                 Log.d("main", "onFailure: " + t.message)
             }
         })
+    }
+
+    private fun createFragment(){
+        val questionFragment = QuestionFragment()
+        val fragmentManager = supportFragmentManager.beginTransaction()
+        fragmentManager.replace(R.id.fragmentMain, questionFragment)
+        fragmentManager.commit()
     }
 }
