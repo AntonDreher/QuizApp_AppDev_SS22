@@ -24,9 +24,8 @@ class QuestionRepository(application: Application) {
         return InsertAsyncTask(questionDao).execute(questionsToInsert)
     }
 
-    fun convertQuestionResponseToDbObject(questionsToConvert : List<QuestionResponse>) : List<QuestionEntity>{
+    private fun convertQuestionResponseToDbObject(questionsToConvert : List<QuestionResponse>) : List<QuestionEntity>{
         val convertedQuestions = mutableListOf<QuestionEntity>()
-        Log.d("size", questionsToConvert.size.toString())
         for(currentQuestion in questionsToConvert){
 
             convertedQuestions.add(
@@ -42,8 +41,8 @@ class QuestionRepository(application: Application) {
         return convertedQuestions
     }
 
-    fun getRandomQuestion() : LiveData<QuestionEntity>{
-        return questionDao.getRandomQuestion()
+    fun getRandomQuestion(excludedIds:List<String>) : LiveData<QuestionEntity>{
+        return questionDao.getRandomQuestion(excludedIds)
     }
     private class InsertAsyncTask(questionDao: QuestionDao) :
     AsyncTask<List<QuestionEntity?>?, Void?, Void?>() {

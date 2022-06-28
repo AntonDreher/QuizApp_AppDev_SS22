@@ -15,6 +15,6 @@ interface QuestionDao {
     @Query("DELETE FROM question")
     fun deleteAll()
 
-    @Query("SELECT * FROM question order by RANDOM() LIMIT 1")
-    fun getRandomQuestion() : LiveData<QuestionEntity>
+    @Query("SELECT * FROM question where id not in (:excludedIds) order by RANDOM() LIMIT 1")
+    fun getRandomQuestion(excludedIds:List<String>) : LiveData<QuestionEntity>
 }
