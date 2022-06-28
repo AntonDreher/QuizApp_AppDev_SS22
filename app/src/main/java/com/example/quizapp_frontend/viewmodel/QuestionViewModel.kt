@@ -19,7 +19,9 @@ class QuestionViewModel(application: Application): AndroidViewModel(application)
             question ->
             run {
                 currentQuestion.value = question
-                alreadyAskedQuestionsId.add(question.id)
+                if(question != null) {
+                    alreadyAskedQuestionsId.add(question.id)
+                }
                 answerSelected.value = false
             }
         }
