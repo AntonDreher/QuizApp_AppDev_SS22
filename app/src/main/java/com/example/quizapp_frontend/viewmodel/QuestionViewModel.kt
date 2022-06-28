@@ -11,13 +11,15 @@ import com.example.quizapp_frontend.repository.QuestionRepository
 class QuestionViewModel(application: Application): AndroidViewModel(application) {
     private val questionRepository:QuestionRepository = QuestionRepository(application)
     private var currentQuestion = MutableLiveData<QuestionEntity>()
+    private var alreadyAskedQuestionsId = ArrayList<String>()
     val answerSelected = MutableLiveData(false)
 
     fun updateCurrentQuestion(){
-        questionRepository.getRandomQuestion().observeForever{
+        questionRepository.getRandomQuestion(alreadyAskedQuestionsId).observeForever{
             question ->
             run {
                 currentQuestion.value = question
+                alreadyAskedQuestionsId.add(question.id)
                 answerSelected.value = false
             }
         }

@@ -41,7 +41,7 @@ class CorrectAnswerFragment : Fragment() {
             questionViewModel.answerSelected()
             Handler(Looper.getMainLooper()).postDelayed({
                 questionViewModel.updateCurrentQuestion()
-            }, 3000)
+            }, 3000) //TODO unify
 
         }
     }

@@ -42,8 +42,8 @@ class QuestionRepository(application: Application) {
         return convertedQuestions
     }
 
-    fun getRandomQuestion() : LiveData<QuestionEntity>{
-        return questionDao.getRandomQuestion()
+    fun getRandomQuestion(excludedIds:List<String>) : LiveData<QuestionEntity>{
+        return questionDao.getRandomQuestion(excludedIds)
     }
     private class InsertAsyncTask(questionDao: QuestionDao) :
     AsyncTask<List<QuestionEntity?>?, Void?, Void?>() {
