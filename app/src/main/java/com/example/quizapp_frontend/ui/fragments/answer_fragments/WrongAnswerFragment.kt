@@ -1,4 +1,4 @@
-package com.example.quizapp_frontend.ui.fragments
+package com.example.quizapp_frontend.ui.fragments.answer_fragments
 
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
