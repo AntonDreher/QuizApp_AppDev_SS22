@@ -30,5 +30,9 @@ data class QuestionEntity (
 
     @NonNull
     @ColumnInfo(name = "incorrectAnswer3")
-    var incorrectAnswer3: String = ""
+    var incorrectAnswer3: String = "",
+
+    @NonNull
+    @ColumnInfo(name = "category")
+    var category : String = ""
 )

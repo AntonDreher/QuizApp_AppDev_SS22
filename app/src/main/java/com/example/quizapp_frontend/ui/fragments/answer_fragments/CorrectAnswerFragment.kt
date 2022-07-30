@@ -1,4 +1,4 @@
-package com.example.quizapp_frontend.ui.fragments
+package com.example.quizapp_frontend.ui.fragments.answer_fragments
 
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,7 +41,7 @@ class CorrectAnswerFragment : Fragment() {
     private fun onClickCardView(view: View) {
         if(questionViewModel.answerSelected.value == false) {
             questionViewModel.answerSelected()
-            gameStatisticsViewModel.correctAnswerSelected()
+            gameStatisticsViewModel.correctAnswerSelected(questionViewModel.currentCategory)
             Handler(Looper.getMainLooper()).postDelayed({
                 questionViewModel.updateCurrentQuestion()
             }, 3000) //TODO unify

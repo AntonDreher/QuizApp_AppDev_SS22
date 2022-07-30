@@ -15,4 +15,7 @@ class QuestionResponse {
 
     @SerializedName("incorrectAnswers")
     var incorrectAnswers : List<String> = emptyList()
+
+    @SerializedName("category")
+    var category : String = ""
 }

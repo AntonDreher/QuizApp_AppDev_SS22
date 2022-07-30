@@ -6,16 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
-import com.example.quizapp_frontend.R
-import com.example.quizapp_frontend.databinding.FragmentCorrectAnswerBinding
 import com.example.quizapp_frontend.databinding.FragmentMenuBinding
 import com.example.quizapp_frontend.navigation.NavigationMessage
 import com.example.quizapp_frontend.viewmodel.NavigationViewModel
-import com.example.quizapp_frontend.viewmodel.QuestionViewModel
 
 class MenuFragment : Fragment() {
     private lateinit var navigationViewModel: NavigationViewModel
     private lateinit var binding: FragmentMenuBinding
+
     override fun onStart(){
         super.onStart()
         navigationViewModel = ViewModelProvider(requireActivity())[NavigationViewModel::class.java]
@@ -28,6 +26,9 @@ class MenuFragment : Fragment() {
         binding = FragmentMenuBinding.inflate(inflater, container, false)
         binding.menuSinglePlayerButton.setOnClickListener{
             navigationViewModel.updateNavigationValue(NavigationMessage.SINGLE_PLAYER)
+        }
+        binding.menuStatisticButton.setOnClickListener{
+            navigationViewModel.updateNavigationValue(NavigationMessage.STATISTICS)
         }
         return binding.root
     }

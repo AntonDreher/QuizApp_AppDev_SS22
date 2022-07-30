@@ -10,6 +10,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.quizapp_frontend.R
 import com.example.quizapp_frontend.databinding.FragmentQuestionBinding
 import com.example.quizapp_frontend.model.QuestionEntity
+import com.example.quizapp_frontend.ui.fragments.answer_fragments.CorrectAnswerFragment
+import com.example.quizapp_frontend.ui.fragments.answer_fragments.WrongAnswerFragment
 import com.example.quizapp_frontend.viewmodel.QuestionViewModel
 
 class QuestionFragment : Fragment() {

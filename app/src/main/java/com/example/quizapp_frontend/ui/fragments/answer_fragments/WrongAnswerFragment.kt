@@ -1,4 +1,4 @@
-package com.example.quizapp_frontend.ui.fragments
+package com.example.quizapp_frontend.ui.fragments.answer_fragments
 
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
@@ -43,7 +43,7 @@ class WrongAnswerFragment : Fragment() {
 
     private fun onClickCardView(view: View) {
         if(questionViewModel.answerSelected.value == false) {
-            gameStatisticsViewModel.wrongAnswerSelected()
+            gameStatisticsViewModel.wrongAnswerSelected(questionViewModel.currentCategory)
             val objectAnimator = ObjectAnimator.ofInt(
                 binding.cardViewWrongAnswer,
                 "backgroundColor",
