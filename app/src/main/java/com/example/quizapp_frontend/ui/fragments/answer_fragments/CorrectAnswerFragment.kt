@@ -41,7 +41,7 @@ class CorrectAnswerFragment : Fragment() {
     private fun onClickCardView(view: View) {
         if(questionViewModel.answerSelected.value == false) {
             questionViewModel.answerSelected()
-            gameStatisticsViewModel.correctAnswerSelected()
+            gameStatisticsViewModel.correctAnswerSelected(questionViewModel.currentCategory)
             Handler(Looper.getMainLooper()).postDelayed({
                 questionViewModel.updateCurrentQuestion()
             }, 3000) //TODO unify

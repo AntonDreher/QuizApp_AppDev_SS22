@@ -29,6 +29,7 @@ class QuestionRepository(application: Application) {
         database = Room.databaseBuilder(application, AppDatabase::class.java, DB_NAME).build()
         questionDao = database.questionDao()
     }
+
     fun insert(questionsResponse : List<QuestionResponse>): AsyncTask<List<QuestionEntity?>?, Void?, Void?>? {
         val questionsToInsert = convertQuestionResponseToDbObject(questionsResponse)
         return InsertAsyncTask(questionDao).execute(questionsToInsert)
@@ -48,7 +49,8 @@ class QuestionRepository(application: Application) {
                 currentQuestion.correctAnswer,
                 currentQuestion.incorrectAnswers[0],
                 currentQuestion.incorrectAnswers[1],
-                currentQuestion.incorrectAnswers[2])
+                currentQuestion.incorrectAnswers[2],
+                currentQuestion.category)
             )
         }
         return convertedQuestions

@@ -5,4 +5,7 @@
     <string name="single_player">Single Player</string>
     <string name="multi_player">Multi Player</string>
     <string name="statistics">Statistics</string>
+    <string name="correct">Correct:</string>
+    <string name="wrong">Wrong:</string>
+    <string name="back">Back</string>
 </resources>
