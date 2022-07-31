@@ -21,24 +21,13 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/menuMultiPlayerButton"
-            android:layout_width="250dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="50dp"
-            android:text="@string/multi_player"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/menuSinglePlayerButton" />
-
-        <Button
             android:id="@+id/menuStatisticButton"
-            android:layout_marginTop="50dp"
             android:layout_width="250dp"
             android:layout_height="50dp"
+            android:layout_marginTop="150dp"
             android:text="@string/statistics"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/menuMultiPlayerButton" />
+            app:layout_constraintTop_toBottomOf="@+id/menuSinglePlayerButton" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

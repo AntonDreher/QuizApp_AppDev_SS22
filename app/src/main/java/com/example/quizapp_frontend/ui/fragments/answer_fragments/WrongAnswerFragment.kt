@@ -2,10 +2,16 @@ package com.example.quizapp_frontend.ui.fragments.answer_fragments
 
 import android.animation.ArgbEvaluator
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.graphics.Color
+import android.hardware.Sensor
+import android.hardware.SensorEvent
+import android.hardware.SensorEventListener
+import android.hardware.SensorManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +19,7 @@ import android.view.animation.Animation
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.quizapp_frontend.databinding.FragmentWrongAnswerBinding
+import com.example.quizapp_frontend.viewmodel.EnvironmentalBrightnessViewModel
 import com.example.quizapp_frontend.viewmodel.GameStatisticsViewModel
 import com.example.quizapp_frontend.viewmodel.QuestionViewModel
 
@@ -20,11 +27,15 @@ class WrongAnswerFragment : Fragment() {
     private lateinit var binding: FragmentWrongAnswerBinding
     private lateinit var questionViewModel : QuestionViewModel
     private lateinit var gameStatisticsViewModel: GameStatisticsViewModel
+    private lateinit var brightnessViewModel: EnvironmentalBrightnessViewModel
+
 
     override fun onStart() {
         super.onStart()
         questionViewModel = ViewModelProvider(requireActivity())[QuestionViewModel::class.java]
         gameStatisticsViewModel = ViewModelProvider(requireActivity())[GameStatisticsViewModel::class.java]
+        brightnessViewModel = ViewModelProvider(requireActivity())[EnvironmentalBrightnessViewModel::class.java]
+        setUpSensorListener()
     }
 
     override fun onCreateView(
@@ -62,4 +73,16 @@ class WrongAnswerFragment : Fragment() {
         }
     }
 
+    private fun setUpSensorListener(){
+        activity?.let {
+            brightnessViewModel.cheatActive.observe(it){
+                value->
+                if(value){
+                    binding.wrongAnswerTextViewId.setTextColor(Color.GRAY)
+                }else{
+                    binding.wrongAnswerTextViewId.setTextColor(Color.WHITE)
+                }
+            }
+        }
+    }
 }

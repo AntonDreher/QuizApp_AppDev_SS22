@@ -18,8 +18,7 @@ class GameFinishedDialogFragment : DialogFragment() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setMessage("Number of questions: ${gameStatisticsViewModel.gameStatistics.totalNumberOfQuestions}\n" +
                 "Correct Answers: ${gameStatisticsViewModel.gameStatistics.numberOfCorrectAnswers}\n"+
-                "Incorrect Answers: ${gameStatisticsViewModel.gameStatistics.numberOfIncorrectAnswers}\n" +
-                "Passed Time: ${gameStatisticsViewModel.gameStatistics.passedTimeInSeconds} s").setTitle("Game finished")
+                "Incorrect Answers: ${gameStatisticsViewModel.gameStatistics.numberOfIncorrectAnswers}\n")
 
         builder.setPositiveButton("OK") { dialog, which ->
             navigationViewModel.updateNavigationValue(NavigationMessage.MAIN_MENU)
